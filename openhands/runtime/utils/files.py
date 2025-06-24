@@ -102,6 +102,10 @@ def insert_lines(
     to_insert: list[str], original: list[str], start: int = 0, end: int = -1
 ) -> list[str]:
     """Insert the new content to the original content based on start and end"""
+    if start == 0 and end == -1:
+        # Replacing the entire file - no extra blank lines
+        return [i + '\n' for i in to_insert]
+
     new_lines = [''] if start == 0 else original[:start]
     new_lines += [i + '\n' for i in to_insert]
     new_lines += [''] if end == -1 else original[end:]
